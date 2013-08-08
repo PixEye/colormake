@@ -15,7 +15,7 @@ class TestBase(unittest.TestCase):
 
 
 class TestMake(TestBase):
- 
+
     def test_enter_directory1(self):
         self.line = "make[1]: Entering directory `/home/user/test'"
         self._check(cm.col_cyan)
@@ -49,16 +49,7 @@ class TestMake(TestBase):
         self._check(cm.col_norm + cm.col_brighten)
 
 
-
 class TestMxmlc(TestBase):
-
-#   def test_in_function(self):
-#       self.line = "file.c: In function 'test_create':"
-#       self._check(cm.col_yellow + cm.col_brighten)
-
-#   def test_warning(self):
-#       self.line = "test.c:2098:5: warning: no previous prototype for '_column' [-Wmissing-prototypes]"
-#       self._check(cm.col_yellow)
 
     def test_error(self):
         self.line = "/path/testFile.as(19): col: 11 Error: Access of undefined property ResourceManager."
@@ -68,10 +59,8 @@ class TestMxmlc(TestBase):
         self._check(cm.col_red)
 
     def test_other_message(self):
-        # self.line = "test.c:22:3: "
         self.line = "Loading configuration file /var/opt/tools/flex-sdk-2_0_1/frameworks/flex-config.xml"
         self._check(cm.col_blue + cm.col_brighten)
-
 
 
 if __name__ == '__main__':
