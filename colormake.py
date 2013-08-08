@@ -28,11 +28,11 @@ col_magenta =      '\033[35m'
 col_cyan =         '\033[36m'
 col_ltgray =       '\033[37m'
 
-col_norm =	       '\033[00m'
+col_norm =         '\033[00m'
 col_background =   '\033[07m'
 col_brighten =     '\033[01m'
 col_underline =    '\033[04m'
-col_blink = 	   '\033[05m'
+col_blink =        '\033[05m'
 
 
 
@@ -43,25 +43,27 @@ col_blink = 	   '\033[05m'
 
 # common patterns
 filename_pat = r'[A-z0-9_\/\. ]+'
-gcc_msg_pat  = filename_pat + r':( In |\d+:\d+:)'
+mxmlc_msg_pat  = filename_pat + r'\(\d+\):\s(col: \d+)?'
 
 patterns = [
         # make messages
-        (r'^make\[\d+\]:',  col_cyan),
+        (r'^make:\s.*Error', col_red + col_brighten),
+				(r'^make.*:\sEntering directory', col_cyan),
         (r'^Making all in', col_cyan + col_brighten),
 
         # make silent rules
         (r'^  (CC|CXX|CCLD|CXXLD)', col_norm + col_brighten),
 
-        # gcc warnings, errors, etc
-        (gcc_msg_pat + r' warning:', col_yellow),
-        (gcc_msg_pat + r' error:',   col_red),
-        (gcc_msg_pat,                col_yellow + col_brighten),
+        # mxmlc warnings, errors, etc
+        (mxmlc_msg_pat + r'\s*warning:', col_yellow),
+        (mxmlc_msg_pat + r'\s*error:', col_red),
+
+        (r'^Loading', col_blue + col_brighten),
 
         # normal
         (r'', col_norm)]
 
-patterns = [(re.compile(pat[0]),pat[1]) for pat in patterns]
+patterns = [(re.compile(pat[0], re.IGNORECASE), pat[1]) for pat in patterns]
 
 
 def line_add_color(line):
@@ -80,4 +82,3 @@ if __name__ == '__main__':
     for line in iter(sys.stdin.readline, ''):
         line_color = line_add_color(line)
         sys.stdout.write(line_color)
-
