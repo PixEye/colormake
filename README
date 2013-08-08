@@ -1,12 +1,10 @@
-
-
 colormake
 ---------
 
-A script to color the output of make,
-ripping-off colormake.pl by Bjarni R.
-Einarsson, with some changes and
-improvements.
+A script to colorize the output of make, ripping-off colormake.pl by Bjarni R. Einarsson,
+with some changes and improvements.
+
+The "mxmlc" branch is to be used with the mxml compiler instead of gcc (when you compile flex or flash for instance).
 
 
 To install:
@@ -25,6 +23,4 @@ To run tests:
 contact
 -------
 
-Daniel C. Jones <dcjones@cs.washington.edu>
-
-
+Daniel C. Jones <dcjones@cs.washington.edu> (for the master branch)
